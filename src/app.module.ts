@@ -7,6 +7,7 @@ import { AuthController } from './auth/auth.controller';
 import { AuthService } from './auth/auth.service';
 import { LoggerMiddleware } from './logger/logger.middleware';
 import { DatabaseModule } from './database/database.module';
+import { ProductModule } from './product/product.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { DatabaseModule } from './database/database.module';
       synchronize: true,
     }),
     DatabaseModule,
+    ProductModule,
   ],
   controllers: [AppController, AuthController],
   providers: [AppService, AuthService],
