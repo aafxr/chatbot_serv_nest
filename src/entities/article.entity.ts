@@ -1,6 +1,4 @@
-import { Column, Entity, PrimaryColumn } from 'typeorm';
 
-@Entity()
 export class Article{
   constructor(p:Partial<Article> = {}){
     Object.entries(p).forEach(([k,v]) => {
@@ -8,9 +6,7 @@ export class Article{
     })
   }
 
-  @PrimaryColumn()
-  id: string
+  id: string = '-1'
 
-  @Column()
   name:string = ''
 }

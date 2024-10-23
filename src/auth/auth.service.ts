@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import * as process from 'node:process';
-import { createHmac } from'node:crypto';
+import * as CryptoJS  from 'crypto-js';
 
 @Injectable()
 export class AuthService {
@@ -15,12 +15,8 @@ export class AuthService {
     for (const [k, v] of params.entries()) strings.push(`${k}=${v}`)
     strings.sort()
     const authData = strings.join('\n')
-    const skHmac = createHmac('sha256', 'WebAppData')
-      .update(process.env.BOT_TOKEN)
-      .digest('hex')
-    const authHash = createHmac('sha256',skHmac)
-      .update(authData)
-      .digest('hex')
+    const skHmac = CryptoJS.HmacSHA256(process.env.BOT_TOKEN, "WebAppData");
+    const authHash = CryptoJS.HmacSHA256(authData, skHmac).toString(CryptoJS.enc.Hex)
 
     return hash === authHash
   }

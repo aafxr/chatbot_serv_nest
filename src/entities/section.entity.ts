@@ -1,6 +1,3 @@
-import { Column, Entity, PrimaryColumn } from 'typeorm';
-
-@Entity()
 export class Section{
   constructor(p:Partial<Section> = {}){
     Object.entries(p).forEach(([k,v]) => {
@@ -8,18 +5,9 @@ export class Section{
     })
   }
 
-  @PrimaryColumn()
-  id: number
-
-  @Column({type: 'json'})
+  id: number = -1
   items: string[] = []
-
-  @Column()
   parent: string = ''
-
-  @Column()
   sort: string = ''
-
-  @Column()
   title: string = ''
 }
