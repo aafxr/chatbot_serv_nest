@@ -1,4 +1,4 @@
-export type Price = {
+export class Price {
   id: number
   name: string
   unitOfMeasure: string

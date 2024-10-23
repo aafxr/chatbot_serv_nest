@@ -5,7 +5,7 @@ import * as fs from 'node:fs';
 @Injectable()
 export class LoggerMiddleware implements NestMiddleware {
   use(req: Request, res: Response, next: NextFunction) {
-    const { ip, method, path: url } = req;
+    const { ip, method, originalUrl: url } = req;
     const userAgent = req.get('user-agent') || '';
     res.on('close', () => {
       const { statusCode } = res;

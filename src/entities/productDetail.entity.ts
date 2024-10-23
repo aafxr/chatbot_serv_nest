@@ -1,53 +1,60 @@
 import { Column, Entity, PrimaryColumn } from 'typeorm';
-import { Price } from '../@types/Price';
-import { Balance } from '../@types/Balance';
-import { Transit } from '../@types/Transit';
+import { Price } from '../classes/Price';
+import { Balance } from '../classes/Balance';
+import { Transit } from '../classes/Transit';
 
 @Entity()
 export class ProductDetail{
+  constructor(p:Partial<ProductDetail> = {}){
+    Object.entries(p).forEach(([k,v]) => {
+      if(k in this) this[k] = v
+    })
+  }
+
+
   @PrimaryColumn()
   id: number
 
   @Column({name: 'api_code',type: 'longtext'})
-  ApiCode: string
+  ApiCode: string = ''
 
   @Column({name: 'product_id', type: 'longtext'})
-  ProductID: string
+  ProductID: string = ''
 
   @Column({name: 'link_to_site', type: 'longtext'})
-  linkToSite: string
+  linkToSite: string = ''
 
   @Column({name: 'pack_unit_measure', type: 'longtext'})
-  PackUnitMeasure: string
+  PackUnitMeasure: string = ''
 
   @Column({name: 'pack_unit_quantity', type: 'longtext'})
-  PackUnitQuantity: string
+  PackUnitQuantity: string = ''
 
   @Column({name: 'product_article', type: 'longtext'})
-  ProductArticle: string
+  ProductArticle: string = ''
 
   @Column({name: 'product_article_for_chat_bot', type: 'longtext'})
-  ProductArticleForChatBot: string
+  ProductArticleForChatBot: string = ''
 
   @Column({name: 'product_name', type: 'longtext'})
-  ProductName: string
+  ProductName: string = ''
 
   @Column({name: 'transit_amount', type: 'longtext'})
-  TransitAmount: string
+  TransitAmount: string = ''
 
   @Column({name: 'unit_of_measure', type: 'longtext'})
-  UnitOfMeasure: string
+  UnitOfMeasure: string = ''
 
 
   @Column({name: 'price_mrc', type: 'json'})
-  Price_MRC: Price
+  Price_MRC: Price = new Price()
 
   @Column({name: 'price_rrc', type: 'json'})
-  Price_RRC: Price
+  Price_RRC: Price = new Price()
 
   @Column({name: 'balance_strings', type: 'json'})
-  Balance_Strings: Balance[]
+  Balance_Strings: Balance[] = []
 
   @Column({name: 'transit', type: 'json'})
-  Transit: Transit
+  Transit: Transit = new Transit()
 }

@@ -9,7 +9,14 @@ export class ProductService {
     private productRepository: Repository<Product>
   ) {}
 
-  @Get()
+  async create(p: Product){
+    return this.productRepository.save(p)
+  }
+
+  async byId(id: Product['id']){
+    return this.productRepository.findOneBy({id})
+  }
+
   async all(): Promise<Product[]>{
     return this.productRepository.find()
   }

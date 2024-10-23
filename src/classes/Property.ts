@@ -1,4 +1,4 @@
-export type Property = {
+export class Property {
   id: number
   name: string
   value: string

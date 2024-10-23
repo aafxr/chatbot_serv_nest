@@ -1,4 +1,4 @@
-export type Transit = {
+export class Transit {
   ID: number
   Quantity: string
   TradeArea_Id: string

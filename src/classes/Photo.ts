@@ -1,4 +1,4 @@
-export type Photo = {
+export class Photo {
   id: number
   src: string
   preview: string
