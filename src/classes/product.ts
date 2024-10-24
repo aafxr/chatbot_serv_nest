@@ -1,5 +1,5 @@
-import { Property } from '../classes/Property';
-import { Photo } from '../classes/Photo';
+import { Property } from './Property';
+import { Photo } from './Photo';
 
 export class Product{
   constructor(p:Partial<Product> = {}){

@@ -1,7 +1,7 @@
 import { Controller, Get, Param, Query } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { AppResponse } from '../classes/AppResponse';
-import { Product } from '../entities';
+import { Product } from '../classes';
 
 @Controller()
 export class ProductController {

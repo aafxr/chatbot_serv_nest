@@ -1,6 +1,6 @@
-import { Price } from '../classes/Price';
-import { Balance } from '../classes/Balance';
-import { Transit } from '../classes/Transit';
+import { Price } from './Price';
+import { Balance } from './Balance';
+import { Transit } from './Transit';
 
 export class ProductDetail{
   constructor(p:Partial<ProductDetail> = {}){

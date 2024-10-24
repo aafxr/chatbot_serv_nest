@@ -1,5 +1,5 @@
 import { DataSource } from 'typeorm';
-import { Product } from '../entities/product.entity';
+import { Product } from '../classes';
 
 export const productProviders = [
   {
