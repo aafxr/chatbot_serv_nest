@@ -8,6 +8,17 @@ export class ProductController {
   constructor(private productService: ProductService) {}
 
 
+  /**
+   * позволяет получить список информацию вида:
+   *
+   * ```
+   * {
+   *    articles: Article[],
+   *    products: Product[],
+   *    sections: Section[]
+   * }
+   * ```
+   */
   @Get('all')
   async getAll(){
     try {
@@ -19,6 +30,9 @@ export class ProductController {
   }
 
 
+  /**
+   * апи возврацает список продуктов
+   */
   @Get('products')
   async products(){
     try {
@@ -30,6 +44,9 @@ export class ProductController {
   }
 
 
+  /**
+   * апи возврацает список секций
+   */
   @Get('sections')
   async sections(){
     try {
@@ -41,6 +58,9 @@ export class ProductController {
   }
 
 
+  /**
+   * апи возврацает список артикулов
+   */
   @Get('articles')
   async articles(){
     try {
@@ -52,6 +72,9 @@ export class ProductController {
   }
 
 
+  /**
+   * апи возврацает детали товара (остатки, свойства, цену)
+   */
   @Get('product/:id/details')
   async getDetails(@Param('id') id: string){
     try {
@@ -65,6 +88,9 @@ export class ProductController {
   }
 
 
+  /**
+   * апи возврацает продукт по указанному ид
+   */
   @Get('product/:id')
   async byId(@Param('id') id: string){
     try {

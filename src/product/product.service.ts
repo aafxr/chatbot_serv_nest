@@ -24,6 +24,10 @@ export class ProductService {
     this.getDetails = this.getDetails.bind(this)
   }
 
+
+  /**
+   * загрузка инфо о товарах
+   */
   async all(): Promise<{
     articles: Article[];
     products: Product[];
@@ -52,12 +56,19 @@ export class ProductService {
   }
 
 
+  /**
+   * список товаров
+   */
   async getProducts() {
     if (this.products.size) return Array.from(this.products.values());
     return (await this.all()).products;
   }
 
 
+  /**
+   * получить товар по ид
+   * @param id
+   */
   async getProductById(id: Product['id']) {
     if (this.products.size) return this.products.get(id);
     await this.all().catch(e => {})
@@ -65,18 +76,28 @@ export class ProductService {
   }
 
 
+  /**
+   * получить список всех артикулов
+   */
   async getArticles() {
     if (this.articles.size) return this.articles.size// Array.from(this.articles.values());
     return (await this.all()).articles;
   }
 
 
+  /**
+   * получить список всех секций
+   */
   async getSections() {
     if (this.sections.size) return Array.from(this.sections.values());
     return (await this.all()).sections;
   }
 
 
+  /**
+   * получить детали товара
+   * @param id
+   */
   async getDetails(id: Product['id']) {
     try {
       let code = this.products.get(id)?.apiCode;
@@ -100,6 +121,9 @@ export class ProductService {
   }
 
 
+  /**
+   * очистка данных сервиса
+   */
   clear(){
     this.articles.clear()
     this.products.clear()

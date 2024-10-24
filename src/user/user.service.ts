@@ -30,9 +30,8 @@ export class UserService {
    * @param id
    */
   async getById(id: User['id']): Promise<User | undefined>{
-    const u = new User({id})
     const res = await this.userRepository.findOneBy({id})
-    if(res) return new User(u)
+    if(res) return new User(res)
   }
 
 

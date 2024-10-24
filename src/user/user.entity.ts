@@ -14,13 +14,13 @@ export class User {
   id: number = -1
 
   @Column()
-  firstName: string = ''
+  first_name: string = ''
 
   @Column()
-  lastName: string = ''
+  last_name: string = ''
 
   @Column()
-  nickname: string = ''
+  username: string = ''
 
   @Column()
   photo: string = ''
