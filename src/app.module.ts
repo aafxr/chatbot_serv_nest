@@ -14,6 +14,8 @@ import { OrderController } from './order/order.controller';
 import { OrderService } from './order/order.service';
 import { OrderModule } from './order/order.module';
 import { OrganizationModule } from './organization/organization.module';
+import { AuthModule } from './auth/auth.module';
+import { OrganizationService } from './organization/organization.service';
 
 @Module({
   imports: [
@@ -33,9 +35,10 @@ import { OrganizationModule } from './organization/organization.module';
     UserModule,
     OrderModule,
     OrganizationModule,
+    AuthModule,
   ],
-  controllers: [AppController, AuthController, OrderController],
-  providers: [AppService, AuthService, OrderService],
+  controllers: [AppController, AuthController, OrderController, OrderController],
+  providers: [AppService, AuthService, OrderService, OrganizationService],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer): any {
@@ -47,6 +50,5 @@ export class AppModule implements NestModule {
       .apply(AuthCheckMiddleware)
       .exclude('auth')
       .forRoutes('*')
-
   }
 }

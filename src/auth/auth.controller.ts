@@ -20,8 +20,8 @@ export class AuthController {
     if(!initData) throw new BadRequestException()
 
     if(this.authService.verify(initData)){
-      const token = this.authService.getToken(initData)
-      return new AppResponse(true, {token})
+      const token = await this.authService.getToken(initData)
+      return new AppResponse(true, {token} )
     }
     throw new UnauthorizedException()
   }

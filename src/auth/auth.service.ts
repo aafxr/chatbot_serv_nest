@@ -38,14 +38,16 @@ export class AuthService {
   async getToken(initData: string) {
     const userJSON = new URLSearchParams(initData).get('user');
     const user = JSON.parse(userJSON);
-    const appUser = await this.userService.getById(+user.id)
+    let appUser = await this.userService.getById(+user.id)
+    if(!appUser) appUser = await this.userService.create(user)
     return jwt.sign(
       {
         exp: Math.floor(Date.now() / 1000) + 3600,
         userId: user.id,
-        role: appUser.role || 'customer'
+        role: appUser?.role || 'customer'
       },
       process.env.SECRET_KEY,
     );
   }
 }
+

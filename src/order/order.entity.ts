@@ -3,9 +3,9 @@ import { User } from '../user/user.entity';
 import { OrderItem } from '../classes';
 import { Organization } from '../organization/organization.entity';
 
-@Entity()
+@Entity('orders')
 export class Order{
-  constructor(o: Partial<Order>) {
+  constructor(o: Partial<Order> = {}) {
     if(o.id !== undefined) this.id = o.id
     if(o.userId !== undefined) this.userId = o.userId
     if(o.status !== undefined) this.status = o.status
@@ -20,7 +20,7 @@ export class Order{
   id: number
 
   @Column()
-  userId: User['id']
+  userId: number
 
   @Column()
   status: string = ''
@@ -28,11 +28,11 @@ export class Order{
   @Column()
   comment: string = ''
 
-  @Column()
+  @Column({type: 'json'})
   orderItems: OrderItem
 
   @Column()
-  organizationId: Organization['id']
+  organizationId: number
 
   @Column()
   createdAt: Date

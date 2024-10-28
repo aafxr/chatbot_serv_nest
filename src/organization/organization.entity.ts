@@ -1,10 +1,9 @@
-import { Injectable } from '@nestjs/common';
 import { User } from '../user/user.entity';
-import { Column, PrimaryColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Injectable()
+@Entity()
 export class Organization {
-  constructor(o: Partial<Organization>) {
+  constructor(o: Partial<Organization> = {}) {
     if(o.id) this.id = o.id
     if(o.name) this.name = o.name
     if(o.fullName) this.fullName = o.fullName
@@ -18,7 +17,7 @@ export class Organization {
     if(o.deletedAt) this.deletedAt = new Date(o.deletedAt)
   }
 
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn()
   id: number = 0
 
   @Column()
@@ -40,7 +39,7 @@ export class Organization {
   inn: string = ''
 
   @Column()
-  userId: User['id']
+  userId: number
 
   @Column()
   createdAt: Date

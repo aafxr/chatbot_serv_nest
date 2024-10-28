@@ -21,7 +21,7 @@ export class UserService {
    * @param u
    */
   async create(u: User){
-    return this.userRepository.save(u)
+    return this.userRepository.save(new User(u))
   }
 
 
