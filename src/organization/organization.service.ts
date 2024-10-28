@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { IsNull, Repository } from 'typeorm';
 import { Organization } from './organization.entity';
 import { User } from '../user/user.entity';
@@ -35,6 +35,12 @@ export class OrganizationService {
    */
   async getAll(userId: User['id']){
     return this.organizationRepository.find({ where: {userId, deletedAt: IsNull()} });
+  }
+
+
+  async update(org: Organization){
+    if(!org.id) throw new BadRequestException()
+    return this.organizationRepository.save(org)
   }
 
 
