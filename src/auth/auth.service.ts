@@ -1,9 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import * as CryptoJS from 'crypto-js';
 import * as jwt from 'jsonwebtoken';
+import { UserService } from '../user/user.service';
 
 @Injectable()
 export class AuthService {
+  constructor(private readonly userService: UserService) {}
 
   /**
    * проверка данных на валидность
@@ -33,14 +35,15 @@ export class AuthService {
    * генерация токена на основе полученных данных от тг
    * @param initData
    */
-  getToken(initData: string) {
+  async getToken(initData: string) {
     const userJSON = new URLSearchParams(initData).get('user');
     const user = JSON.parse(userJSON);
-
+    const appUser = await this.userService.getById(+user.id)
     return jwt.sign(
       {
         exp: Math.floor(Date.now() / 1000) + 3600,
         userId: user.id,
+        role: appUser.role || 'customer'
       },
       process.env.SECRET_KEY,
     );

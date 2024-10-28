@@ -23,6 +23,18 @@ export class AuthCheckMiddleware implements NestMiddleware {
         })
       })
       req.userId = +payload.userId
+      
+      switch (payload.role) {
+        case 'admin':
+          req.isAdmin = true
+          break
+        case 'manager':
+          req.isManager = true
+          break
+        default:
+          req.isCustomer = true
+      }
+
     } catch (e){
       throw new UnauthorizedException()
     }

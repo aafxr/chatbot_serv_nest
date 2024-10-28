@@ -1,10 +1,14 @@
 import { BadRequestException, Controller, Get, Query, UnauthorizedException } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AppResponse } from '../classes/AppResponse';
+import { UserService } from '../user/user.service';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService ) {}
+  constructor(
+    private readonly userService: UserService,
+    private readonly authService: AuthService
+  ) {}
 
 
   /**
@@ -12,7 +16,7 @@ export class AuthController {
    * @param initData
    */
   @Get()
-  auth(@Query('initData') initData: string){
+  async auth(@Query('initData') initData: string){
     if(!initData) throw new BadRequestException()
 
     if(this.authService.verify(initData)){

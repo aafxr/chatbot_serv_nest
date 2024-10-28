@@ -1,4 +1,5 @@
 import { Column, Entity, PrimaryColumn } from 'typeorm';
+import { UserRole } from '../@types/UserRole';
 
 @Entity()
 export class User {
@@ -41,5 +42,8 @@ export class User {
 
   @Column()
   storehouseId: string = ''
+
+  @Column()
+  role: UserRole = 'customer'
 
 }

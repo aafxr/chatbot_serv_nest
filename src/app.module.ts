@@ -10,6 +10,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { DatabaseModule } from './database/database.module';
 import { UserModule } from './user/user.module';
 import { AuthCheckMiddleware } from './middlewares/authCheck.middleware';
+import { OrderController } from './order/order.controller';
+import { OrderService } from './order/order.service';
+import { OrderModule } from './order/order.module';
+import { OrganizationModule } from './organization/organization.module';
 
 @Module({
   imports: [
@@ -27,9 +31,11 @@ import { AuthCheckMiddleware } from './middlewares/authCheck.middleware';
     DatabaseModule,
     ProductModule,
     UserModule,
+    OrderModule,
+    OrganizationModule,
   ],
-  controllers: [AppController, AuthController],
-  providers: [AppService, AuthService],
+  controllers: [AppController, AuthController, OrderController],
+  providers: [AppService, AuthService, OrderService],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer): any {
