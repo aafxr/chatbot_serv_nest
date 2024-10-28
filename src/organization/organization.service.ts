@@ -10,18 +10,38 @@ export class OrganizationService {
     private readonly organizationRepository: Repository<Organization>,
   ) {}
 
+
+  /**
+   * создать организацию
+   * @param org
+   */
   async create(org: Organization){
     return this.organizationRepository.save(org)
   }
 
+
+  /**
+   * получить организацию по ид
+   * @param id
+   */
   async getBtId(id: Organization['id']) {
     return this.organizationRepository.findOneBy({id})
   }
-  
+
+
+  /**
+   * получить все не удаленные организации пользователя
+   * @param userId
+   */
   async getAll(userId: User['id']){
     return this.organizationRepository.find({ where: {userId, deletedAt: IsNull()} });
   }
 
+
+  /**
+   * удалить организацию пользователя путем установки поля deletedAt
+   * @param org
+   */
   async delete(org: Organization){
     const o = new Organization(org)
     o.deletedAt = new Date()
